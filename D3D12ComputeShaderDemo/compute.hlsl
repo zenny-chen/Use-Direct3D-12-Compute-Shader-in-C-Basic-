@@ -9,3 +9,4 @@ void CSMain(uint3 groupID : SV_GroupID, uint3 tid : SV_DispatchThreadID, uint3 l
 
     dstBuffer[index] = srcBuffer[index] + 10;
 }
+
