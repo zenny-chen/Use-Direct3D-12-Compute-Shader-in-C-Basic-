@@ -36,4 +36,4 @@ Last, expand **Linker**, substitute the **um\x64** *Lib* directory in your own W
 
 ![3.jpg](https://github.com/zenny-chen/Use-Direct3D-12-Compute-Shader-in-C-Basic-/blob/master/3.JPG)
 
-After all the work above, you can now run the sample successfully.
+After all the work above done, you can now run the sample successfully.
