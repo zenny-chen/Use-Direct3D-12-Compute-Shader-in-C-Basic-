@@ -17,5 +17,23 @@ The genenral process is as follows:
 
 <br />
 
-The demo project is built with Visual Studio 2019 community. Before you start, you may have to do the follwing settings.
+The demo project is built with Visual Studio 2019 community. Before you start, you may have to do the following stuffs.
 
+1. Ensure that Visual Studio 2019 (Community) has been installed.
+1. Ensure that Windows Kits for Windows 10 with DirectX 12 SDK have been installed. This can be installed with Visual Studio Installer.
+1. Now, you can open the solution file (.sln) in this sample and check the directory in which DirectX 12 SDK was installed.
+1. Next up, you should do the following configurations.
+
+First, Move to the "**Project"** item in the menu bar and choose the current project's **properties** as following illustrated.
+
+![1.jpg](https://github.com/zenny-chen/Use-Direct3D-12-Compute-Shader-in-C-Basic-/blob/master/1.JPG)
+
+Second, expand **C/C++** item, substitue the **um** and **shared** *Include* directory in your own Windows 10 for the ones in this sample. The sample uses `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared`. Maybe the versions are different.
+
+![2.jpg](https://github.com/zenny-chen/Use-Direct3D-12-Compute-Shader-in-C-Basic-/blob/master/2.JPG)
+
+Last, expand **Linker**, substitute the **um\x64** *Lib* directory in your own Windows 10 for the one in this sample. The sample uses `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64`. Maybe the versions are different.
+
+![3.jpg](https://github.com/zenny-chen/Use-Direct3D-12-Compute-Shader-in-C-Basic-/blob/master/3.JPG)
+
+After all the work above, you can now run the sample successfully.
