@@ -278,16 +278,16 @@ static size_t UpdateSubresources(
 }
 
 // Wait for the whole command queue completed
-static void FlushCommandQueue(UINT64 signalValue)
+static void SyncCommandQueue(ID3D12CommandQueue *commandQueue, ID3D12Device *device, UINT64 signalValue)
 {
     ID3D12Fence *fence;
-    if(s_device->lpVtbl->CreateFence(s_device, 0, D3D12_FENCE_FLAG_NONE, &IID_ID3D12Fence, (void**)&fence)  < 0)
+    if(device->lpVtbl->CreateFence(device, 0, D3D12_FENCE_FLAG_NONE, &IID_ID3D12Fence, (void**)&fence)  < 0)
         return;
 
     // Add an instruction to the command queue to set a new fence point.  Because we 
     // are on the GPU timeline, the new fence point won't be set until the GPU finishes
     // processing all the commands prior to this Signal().
-    if (s_computeCommandQueue->lpVtbl->Signal(s_computeCommandQueue, fence, signalValue) < 0)
+    if (commandQueue->lpVtbl->Signal(commandQueue, fence, signalValue) < 0)
         puts("Signal failed!");
 
     // Wait until the GPU has completed commands up to this fence point.
@@ -669,7 +669,7 @@ static void DoCompute(void)
     s_computeCommandQueue->lpVtbl->ExecuteCommandLists(s_computeCommandQueue, 1, 
         (ID3D12CommandList* const[]) { (ID3D12CommandList*)s_computeCommandList });
 
-    FlushCommandQueue(2);
+    SyncCommandQueue(s_computeCommandQueue, s_device, 2);
 
     void* pData;
     const D3D12_RANGE range = { 0, TEST_DATA_COUNT };
@@ -764,7 +764,7 @@ int main(void)
 
         s_computeCommandQueue->lpVtbl->ExecuteCommandLists(s_computeCommandQueue, 1, (ID3D12CommandList* const []) { (ID3D12CommandList*)s_computeCommandList });
 
-        FlushCommandQueue(1);
+        SyncCommandQueue(s_computeCommandQueue, s_device, 1);
 
         // After finishing the whole buffer copy operation,
         // the intermediate buffer s_uploadBuffer can be released now.
