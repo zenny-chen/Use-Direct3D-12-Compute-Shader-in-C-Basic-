@@ -571,7 +571,7 @@ static bool InitAssets(void)
     return true;
 }
 
-// Initialize the coomand list and the command queue
+// Initialize the command list and the command queue
 static bool InitComputeCommands(void)
 {
     D3D12_COMMAND_QUEUE_DESC queueDesc = { D3D12_COMMAND_LIST_TYPE_DIRECT, 0, D3D12_COMMAND_QUEUE_FLAG_NONE };
@@ -607,7 +607,7 @@ static bool CreateBuffers(void)
     return true;
 }
 
-// Do the compute operation
+// Do the compute operation and fetch the result
 static void DoCompute(void)
 {
     ID3D12Resource *readBackBuffer = NULL;
